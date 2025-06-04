@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meu Portfolio</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cantora+One&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav class="navbar" role="navigation" aria-label="Menu principal">
+      <ul class="nav-links">
+        <li><a href="#Tema">Tema</a></li>
+        <li><a href="#Sobre">Sobre</a></li>
+        <li><a href="#Música">Música</a></li>
+        <li><a href="#clima"></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Cartão de perfil ajustado com informações na lateral -->
+  <section class="profile-card" id="home" tabindex="0" aria-label="Perfil de Diego Ewerton">
+    <div class="profile-content">
+      <div class="profile-image">
+        <img src="images/icon.jpeg" alt="Foto de Diego Ewerton" class="profile-photo" />
+      </div>
+      <div class="profile-sidebar">
+        <div class="profile-info">
+          <h1>Diego Ewerton</h1>
+          <p><strong>Profissão:</strong> Desenvolvedor Front-end</p>
+          <p><strong>Idade:</strong> 21 Anos</p>
+          <p><strong>Localidade:</strong> Recife, Pernambuco</p>
+          <p><strong>Nível:</strong> Junior</p>
+          <div class="profile-skills">
+            <img src="images/javascript.png" alt="Ícone JavaScript" class="skill-icon" />
+            <img src="images/html.png" alt="Ícone HTML" class="skill-icon" />
+            <img src="images/css.png" alt="Ícone CSS" class="skill-icon" />
+            <img src="images/node.png" alt="Ícone Node.js" class="skill-icon" />
+            <img src="images/mysql.png" alt="Ícone MySQL" class="skill-icon" />
+            <img src="images/react.png" alt="Ícone React" class="skill-icon" />
+          </div>
+        </div>
+        <div class="profile-buttons">
+          <a href="#" class="profile-button linkedin" aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i> LinkedIn
+          </a>
+          <a href="#" class="profile-button github" aria-label="GitHub">
+            <i class="bi bi-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs para alternar entre Projetos e Animações -->
+  <div class="tabs" role="tablist" aria-label="Alternar entre Projetos e Animações">
+    <button class="tab-button active" id="tab-projetos" role="tab" aria-controls="projetos" aria-selected="true">
+      Projetos <i class="bi bi-terminal"></i>
+    </button>
+    <button class="tab-button" id="tab-animacoes" role="tab" aria-controls="animacoes" aria-selected="false">Animações</button>
+  </div>
+
+  <section id="projetos" class="section projects-section" aria-label="Projetos">
+    <div class="projects-grid">
+      <article class="project-card" tabindex="0" aria-label="Projeto 1">
+        <h3 class="project-title">Projeto Zeda Link</h3>
+        <img src="https://guildadosgamers.com.br/wp-content/uploads/2025/01/link-zelda.png" alt="Imagem do Projeto 1 - Link Zelda" class="project-image" />
+        <div class="project-info">
+          <p>Projeto Zeda Link é uma iniciativa para integrar elementos clássicos de jogos Zelda com funcionalidades modernas de web design. Utiliza tecnologias HTML, CSS e JavaScript para criar uma interface dinâmica e interativa.</p>
+        </div>
+      </article>
+      <article class="project-card" tabindex="0" aria-label="Projeto 2">
+        <h3 class="project-title">Projeto 2</h3>
+        <img src="https://www.nintendo.com/eu/media/images/10_share_images/portals_3/2x1_SuperMarioHub.jpg" alt="Imagem do Projeto 2" class="project-image" />
+        <div class="project-info">
+          <p>Este projeto explora layouts responsivos e técnicas avançadas de CSS Grid para oferecer uma experiência de usuário fluida em múltiplos dispositivos.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="animacoes" class="section animations-section" aria-label="Animações" style="display:none;">
+    <div class="projects-grid">
+      <article class="project-card" tabindex="0" aria-label="Animação 1">
+        <h3 class="project-title">Animação 1</h3>
+        <img src="images/animation1-placeholder.jpg" alt="Imagem da Animação 1" class="project-image" />
+        <p>Descrição breve da animação 1.</p>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Ver Animação 1">Ver animação</a>
+      </article>
+      <div class="project-description">
+        <p>Esta animação apresenta transições suaves utilizando CSS e JavaScript para melhorar a experiência visual.</p>
+      </div>
+      <article class="project-card" tabindex="0" aria-label="Animação 2">
+        <h3 class="project-title">Animação 2</h3>
+        <img src="images/animation2-placeholder.jpg" alt="Imagem da Animação 2" class="project-image" />
+        <p>Descrição breve da animação 2.</p>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Ver Animação 2">Ver animação</a>
+      </article>
+      <div class="project-description">
+        <p>Segunda animação com foco em interação do usuário e design responsivo.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Script para alternar entre Projetos e Animações com acessibilidade
+    const tabProjetos = document.getElementById('tab-projetos');
+    const tabAnimacoes = document.getElementById('tab-animacoes');
+    const secProjetos = document.getElementById('projetos');
+    const secAnimacoes = document.getElementById('animacoes');
+
+    function activateTab(tabToActivate) {
+      if (tabToActivate === 'projetos') {
+        tabProjetos.classList.add('active');
+        tabProjetos.setAttribute('aria-selected', 'true');
+        tabAnimacoes.classList.remove('active');
+        tabAnimacoes.setAttribute('aria-selected', 'false');
+        secProjetos.style.display = 'block';
+        secAnimacoes.style.display = 'none';
+      } else {
+        tabAnimacoes.classList.add('active');
+        tabAnimacoes.setAttribute('aria-selected', 'true');
+        tabProjetos.classList.remove('active');
+        tabProjetos.setAttribute('aria-selected', 'false');
+        secAnimacoes.style.display = 'block';
+        secProjetos.style.display = 'none';
+      }
+    }
+
+    tabProjetos.addEventListener('click', () => activateTab('projetos'));
+    tabAnimacoes.addEventListener('click', () => activateTab('animacoes'));
+  </script>
+</body>
+</html>
