@@ -3,35 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meu Portfolio</title>
+  <title>Diego Dev</title>
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cantora+One&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cantora+One&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="icon" href="favicon_64x64.ico" type="image/x-icon" sizes="64x64" />
 </head>
 <body>
-  <header>
-    <nav class="navbar" role="navigation" aria-label="Menu principal">
-      <ul class="nav-links">
-        <li><a href="#Tema">Tema</a></li>
-        <li><a href="#Sobre" id="open-sobre-modal">Sobre</a></li>
-        <li><a href="#Música">Música</a></li>
-        <li><a href="#clima"></a></li>
-      </ul>
+  <header class="main-header">
+    <nav aria-label="Menu principal">
+      <button id="open-sobre-modal" class="header-button">Sobre</button>
+      <button class="header-button" id="btnMusica">Música</button>
+      <button class="header-button">Tema</button>
     </nav>
   </header>
 
+  <audio id="playerMusica" src="ｍａｇｉｃ (lofi hip hop).mp3"></audio>
+
+  <canvas id="canvas"></canvas>
+
   <!-- Modal Sobre -->
-  <div id="sobre-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-modal">&times;</span>
-      <h2>Sobre Mim</h2>
+  <div id="sobre-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1" style="display:none;">
+    <div class="modal-content" role="document">
+      <button class="close-modal" aria-label="Fechar modal">&times;</button>
+      <h2 id="modal-title">Sobre Mim</h2>
       <p>Olá! Meu nome é Diego Ewerton, sou um Desenvolvedor Front-end de 21 anos, baseado em Recife, Pernambuco. Sou apaixonado por criar interfaces dinâmicas e responsivas usando HTML, CSS e JavaScript. Atualmente, estou no nível Junior e buscando crescer na área de desenvolvimento web. Adoro trabalhar em projetos criativos e aprender novas tecnologias!</p>
     </div>
   </div>
 
-  <!-- Cartão de perfil ajustado com informações na lateral -->
+  <!-- Profile Card -->
   <section class="profile-card" id="home" tabindex="0" aria-label="Perfil de Diego Ewerton">
     <div class="profile-content">
       <div class="profile-image">
@@ -65,12 +67,14 @@
     </div>
   </section>
 
-  <!-- Tabs para alternar entre Projetos e Animações -->
+  <!-- Tabs -->
   <div class="tabs" role="tablist" aria-label="Alternar entre Projetos e Animações">
-    <button class="tab-button active" id="tab-projetos" role="tab" aria-controls="projetos" aria-selected="true">
+    <button class="tab-button active" id="tab-projetos" role="tab" aria-controls="projetos" aria-selected="true" tabindex="0">
       Projetos <i class="bi bi-terminal"></i>
     </button>
-    <button class="tab-button" id="tab-animacoes" role="tab" aria-controls="animacoes" aria-selected="false">Animações</button>
+    <button class="tab-button" id="tab-animacoes" role="tab" aria-controls="animacoes" aria-selected="false" tabindex="-1">
+      Animações
+    </button>
   </div>
 
   <section id="projetos" class="section projects-section" aria-label="Projetos">
@@ -100,23 +104,64 @@
         <p>Descrição breve da animação 1.</p>
         <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Ver Animação 1">Ver animação</a>
       </article>
-      <div class="project-description">
-        <p>Esta animação apresenta transições suaves utilizando CSS e JavaScript para melhorar a experiência visual.</p>
-      </div>
       <article class="project-card" tabindex="0" aria-label="Animação 2">
         <h3 class="project-title">Animação 2</h3>
         <img src="images/animation2-placeholder.jpg" alt="Imagem da Animação 2" class="project-image" />
         <p>Descrição breve da animação 2.</p>
         <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Ver Animação 2">Ver animação</a>
       </article>
-      <div class="project-description">
-        <p>Segunda animação com foco em interação do usuário e design responsivo.</p>
-      </div>
     </div>
   </section>
 
+  <script src="https://esm.sh/tweakpane@4.0.3"></script>
   <script>
-    // Script para alternar entre Projetos e Animações com acessibilidade
+    // Matrix Animation (igual ao seu original)
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    let state = {
+      fps: 20,
+      color: "#1c4c7d",
+      charset: "01",
+      size: 25
+    };
+
+    let w, h, p;
+    const resize = () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      p = Array(Math.ceil(w / state.size)).fill(0);
+    };
+    window.addEventListener("resize", resize);
+    resize();
+
+    const random = (items) => items[Math.floor(Math.random() * items.length)];
+
+    const draw = () => {
+      ctx.fillStyle = "rgba(0,0,0,.05)";
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = state.color;
+      ctx.font = `${state.size}px monospace`;
+      for (let i = 0; i < p.length; i++) {
+        let v = p[i];
+        ctx.fillText(random(state.charset), i * state.size, v);
+        p[i] = v >= h || v >= 10000 * Math.random() ? 0 : v + state.size;
+      }
+    };
+
+    let prevTime = performance.now();
+    const animate = (currTime) => {
+      const deltaTime = currTime - prevTime;
+      const interval = 1000 / state.fps;
+      if (deltaTime >= interval) {
+        draw();
+        prevTime = currTime - (deltaTime % interval);
+      }
+      requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+
+    // Tabs
     const tabProjetos = document.getElementById('tab-projetos');
     const tabAnimacoes = document.getElementById('tab-animacoes');
     const secProjetos = document.getElementById('projetos');
@@ -126,15 +171,23 @@
       if (tabToActivate === 'projetos') {
         tabProjetos.classList.add('active');
         tabProjetos.setAttribute('aria-selected', 'true');
+        tabProjetos.tabIndex = 0;
+
         tabAnimacoes.classList.remove('active');
         tabAnimacoes.setAttribute('aria-selected', 'false');
+        tabAnimacoes.tabIndex = -1;
+
         secProjetos.style.display = 'block';
         secAnimacoes.style.display = 'none';
       } else {
         tabAnimacoes.classList.add('active');
         tabAnimacoes.setAttribute('aria-selected', 'true');
+        tabAnimacoes.tabIndex = 0;
+
         tabProjetos.classList.remove('active');
         tabProjetos.setAttribute('aria-selected', 'false');
+        tabProjetos.tabIndex = -1;
+
         secAnimacoes.style.display = 'block';
         secProjetos.style.display = 'none';
       }
@@ -143,25 +196,100 @@
     tabProjetos.addEventListener('click', () => activateTab('projetos'));
     tabAnimacoes.addEventListener('click', () => activateTab('animacoes'));
 
-    // Script para abrir e fechar o modal
-    const openModalBtn = document.getElementById('open-sobre-modal');
+    // Modal + trap focus
     const modal = document.getElementById('sobre-modal');
-    const closeModalBtn = document.querySelector('.close-modal');
+    const openModalBtn = document.getElementById('open-sobre-modal');
+    const closeModalBtn = modal.querySelector('.close-modal');
+
+    // Get all focusable elements in modal
+    function getFocusableElements() {
+      return modal.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+    }
 
     openModalBtn.addEventListener('click', (e) => {
-      e.preventDefault(); // Evita o comportamento padrão do link
-      modal.style.display = 'flex';
+      e.preventDefault();
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+      // focus primeiro elemento focável dentro do modal
+      const focusableElements = getFocusableElements();
+      if (focusableElements.length) {
+        focusableElements[0].focus();
+      }
     });
 
     closeModalBtn.addEventListener('click', () => {
       modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      openModalBtn.focus();
     });
 
-    // Fechar o modal ao clicar fora dele
-    window.addEventListener('click', (e) => {
+    modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+        openModalBtn.focus();
       }
+    });
+
+    // Trap focus no modal
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+        openModalBtn.focus();
+      }
+
+      if (e.key === 'Tab') {
+        const focusableElements = getFocusableElements();
+        if (focusableElements.length === 0) return;
+
+        const firstEl = focusableElements[0];
+        const lastEl = focusableElements[focusableElements.length - 1];
+        if (e.shiftKey) {
+          // shift + tab
+          if (document.activeElement === firstEl) {
+            e.preventDefault();
+            lastEl.focus();
+          }
+        } else {
+          // tab
+          if (document.activeElement === lastEl) {
+            e.preventDefault();
+            firstEl.focus();
+          }
+        }
+      }
+    });
+
+    // Scroll header hide/show
+    let lastScrollTop = 0;
+    const header = document.querySelector('.main-header');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        header.classList.add('hide');
+      } else {
+        header.classList.remove('hide');
+      }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+
+    // Botão Música
+    const btnMusica = document.getElementById('btnMusica');
+    const player = document.getElementById('playerMusica');
+    let tocando = false;
+
+    btnMusica.addEventListener('click', () => {
+      if (!tocando) {
+        player.play();
+        btnMusica.textContent = 'Pausar Música';
+      } else {
+        player.pause();
+        btnMusica.textContent = 'Música';
+      }
+      tocando = !tocando;
     });
   </script>
 </body>
