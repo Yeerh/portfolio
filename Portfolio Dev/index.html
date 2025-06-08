@@ -1,65 +1,74 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Diego Dev</title>
+  <meta name="description" content="Portfólio de Diego Ewerton, desenvolvedor Front-end Junior baseado em Recife, Pernambuco." />
+  <meta name="keywords" content="desenvolvedor front-end, portfólio, Diego Ewerton, web development, Recife" />
+  <meta name="author" content="Diego Ewerton" />
+  <title>Diego Dev - Portfólio</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cantora+One&display=swap" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cantora+One&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <link rel="icon" href="favicon_64x64.ico" type="image/x-icon" sizes="64x64" />
 </head>
-<body>
+<body data-theme="default">
   <header class="main-header">
     <nav aria-label="Menu principal">
-      <button id="open-sobre-modal" class="header-button">Sobre</button>
-      <button class="header-button" id="btnMusica">Música</button>
-      <button class="header-button">Tema</button>
+      <button id="open-sobre-modal" class="header-button" aria-label="Abrir modal Sobre">Sobre</button>
+      <button class="header-button" id="btnMusica" aria-label="Tocar música">Música</button>
+      <button class="header-button" id="btnTema" aria-label="Alternar para tema verde">Tema Verde</button>
     </nav>
   </header>
 
-  <audio id="playerMusica" src="ｍａｇｉｃ (lofi hip hop).mp3"></audio>
+  <audio id="playerMusica" src="ｍａｇｉｃ (lofi hip hop).mp3" preload="none"></audio>
 
-  <canvas id="canvas"></canvas>
+  <canvas id="canvas" aria-hidden="true"></canvas>
 
   <!-- Modal Sobre -->
-  <div id="sobre-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1" style="display:none;">
+  <div id="sobre-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title" tabindex="-1" style="display:none;">
     <div class="modal-content" role="document">
-      <button class="close-modal" aria-label="Fechar modal">&times;</button>
+      <button class="close-modal" aria-label="Fechar modal">×</button>
       <h2 id="modal-title">Sobre Mim</h2>
       <p>Olá! Meu nome é Diego Ewerton, sou um Desenvolvedor Front-end de 21 anos, baseado em Recife, Pernambuco. Sou apaixonado por criar interfaces dinâmicas e responsivas usando HTML, CSS e JavaScript. Atualmente, estou no nível Junior e buscando crescer na área de desenvolvimento web. Adoro trabalhar em projetos criativos e aprender novas tecnologias!</p>
     </div>
+  </div>
+
+  <!-- Tooltip para Habilidades -->
+  <div id="skill-tooltip" class="skill-tooltip" role="tooltip" aria-hidden="true" style="display:none;">
+    <p id="skill-tooltip-content"></p>
   </div>
 
   <!-- Profile Card -->
   <section class="profile-card" id="home" tabindex="0" aria-label="Perfil de Diego Ewerton">
     <div class="profile-content">
       <div class="profile-image">
-        <img src="images/icon.jpeg" alt="Foto de Diego Ewerton" class="profile-photo" />
+        <img src="images/icon.jpeg" alt="Foto de Diego Ewerton" class="profile-photo" loading="lazy" srcset="images/icon-200.jpeg 200w, images/icon.jpeg 300w" sizes="(max-width: 768px) 200px, 300px" />
       </div>
       <div class="profile-sidebar">
         <div class="profile-info">
-          <h1>Diego Ewerton</h1>
+          <h1>Diego Ewerton Menezes da Silva</h1>
           <p><strong>Profissão:</strong> Desenvolvedor Front-end</p>
           <p><strong>Idade:</strong> 21 Anos</p>
           <p><strong>Localidade:</strong> Recife, Pernambuco</p>
           <p><strong>Nível:</strong> Junior</p>
           <div class="profile-skills">
-            <img src="images/javascript.png" alt="Ícone JavaScript" class="skill-icon" />
-            <img src="images/html.png" alt="Ícone HTML" class="skill-icon" />
-            <img src="images/css.png" alt="Ícone CSS" class="skill-icon" />
-            <img src="images/node.png" alt="Ícone Node.js" class="skill-icon" />
-            <img src="images/mysql.png" alt="Ícone MySQL" class="skill-icon" />
-            <img src="images/react.png" alt="Ícone React" class="skill-icon" />
+            <img src="images/javascript.png" alt="JavaScript: linguagem de programação para interatividade" class="skill-icon" data-skill="javascript" tabindex="0" aria-describedby="skill-tooltip" />
+            <img src="images/html.png" alt="HTML: estrutura de páginas web" class="skill-icon" data-skill="html" tabindex="0" aria-describedby="skill-tooltip" />
+            <img src="images/css.png" alt="CSS: estilização de interfaces web" class="skill-icon" data-skill="css" tabindex="0" aria-describedby="skill-tooltip" />
+            <img src="images/node.png" alt="Node.js: JavaScript no lado do servidor" class="skill-icon" data-skill="node" tabindex="0" aria-describedby="skill-tooltip" />
+            <img src="images/mysql.png" alt="MySQL: banco de dados relacional" class="skill-icon" data-skill="mysql" tabindex="0" aria-describedby="skill-tooltip" />
+            <img src="images/react.png" alt="React: biblioteca para interfaces dinâmicas" class="skill-icon" data-skill="react" tabindex="0" aria-describedby="skill-tooltip" />
           </div>
         </div>
         <div class="profile-buttons">
-          <a href="#" class="profile-button linkedin" aria-label="LinkedIn">
+          <a href="https://linkedin.com/in/diego-ewerton" class="profile-button linkedin" aria-label="Visitar perfil no LinkedIn" target="_blank" rel="noopener noreferrer">
             <i class="bi bi-linkedin"></i> LinkedIn
           </a>
-          <a href="#" class="profile-button github" aria-label="GitHub">
+          <a href="https://github.com/diego-ewerton" class="profile-button github" aria-label="Visitar perfil no GitHub" target="_blank" rel="noopener noreferrer">
             <i class="bi bi-github"></i> GitHub
           </a>
         </div>
@@ -77,18 +86,18 @@
     </button>
   </div>
 
-  <section id="projetos" class="section projects-section" aria-label="Projetos">
+  <section id="projetos" class="section projects-section" aria-labelledby="projetos-title">
     <div class="projects-grid">
-      <article class="project-card" tabindex="0" aria-label="Projeto 1">
-        <h3 class="project-title">Projeto Zeda Link</h3>
-        <img src="https://guildadosgamers.com.br/wp-content/uploads/2025/01/link-zelda.png" alt="Imagem do Projeto 1 - Link Zelda" class="project-image" />
+      <article class="project-card" tabindex="0" aria-labelledby="projeto-1-title">
+        <h3 id="projeto-1-title" class="project-title">Projeto Zeda Link</h3>
+        <img src="https://guildadosgamers.com.br/wp-content/uploads/2025/01/link-zelda.png" alt="Imagem do Projeto Zeda Link" class="project-image" loading="lazy" />
         <div class="project-info">
           <p>Projeto Zeda Link é uma iniciativa para integrar elementos clássicos de jogos Zelda com funcionalidades modernas de web design. Utiliza tecnologias HTML, CSS e JavaScript para criar uma interface dinâmica e interativa.</p>
         </div>
       </article>
-      <article class="project-card" tabindex="0" aria-label="Projeto 2">
-        <h3 class="project-title">Projeto 2</h3>
-        <img src="https://www.nintendo.com/eu/media/images/10_share_images/portals_3/2x1_SuperMarioHub.jpg" alt="Imagem do Projeto 2" class="project-image" />
+      <article class="project-card" tabindex="0" aria-labelledby="projeto-2-title">
+        <h3 id="projeto-2-title" class="project-title">Projeto Super Mario</h3>
+        <img src="https://www.nintendo.com/eu/media/images/10_share_images/portals_3/2x1_SuperMarioHub.jpg" alt="Imagem do Projeto Super Mario" class="project-image" loading="lazy" />
         <div class="project-info">
           <p>Este projeto explora layouts responsivos e técnicas avançadas de CSS Grid para oferecer uma experiência de usuário fluida em múltiplos dispositivos.</p>
         </div>
@@ -96,34 +105,61 @@
     </div>
   </section>
 
-  <section id="animacoes" class="section animations-section" aria-label="Animações" style="display:none;">
+  <section id="animacoes" class="section animations-section" aria-labelledby="animacoes-title" style="display:none;">
     <div class="projects-grid">
-      <article class="project-card" tabindex="0" aria-label="Animação 1">
-        <h3 class="project-title">Animação 1</h3>
-        <img src="images/animation1-placeholder.jpg" alt="Imagem da Animação 1" class="project-image" />
-        <p>Descrição breve da animação 1.</p>
-        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Ver Animação 1">Ver animação</a>
+      <article class="project-card" tabindex="0" aria-labelledby="animacao-1-title">
+        <h3 id="animacao-1-title" class="project-title">Animação Zelda Link</h3>
+        <img src="https://i.pinimg.com/originals/dd/a2/83/dda283555874b8e6eab8f3cecdf8457b.gif" alt="Imagem da Animação 1" class="project-image" loading="lazy" />
+        <div class="project-info">
+          <p>Descrição breve da animação 1, com efeitos visuais criados em JavaScript e CSS.</p>
+        </div>
       </article>
-      <article class="project-card" tabindex="0" aria-label="Animação 2">
-        <h3 class="project-title">Animação 2</h3>
-        <img src="images/animation2-placeholder.jpg" alt="Imagem da Animação 2" class="project-image" />
-        <p>Descrição breve da animação 2.</p>
-        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Ver Animação 2">Ver animação</a>
+      <article class="project-card" tabindex="0" aria-labelledby="animacao-2-title">
+        <h3 id="animacao-2-title" class="project-title">Animação Mario Bross</h3>
+        <img src="https://www.icegif.com/wp-content/uploads/2023/05/icegif-729.gif" alt="Imagem da Animação 2" class="project-image" loading="lazy" />
+        <div class="project-info">
+          <p>Descrição breve da animação 2, explorando transições suaves e interatividade.</p>
+        </div>
       </article>
     </div>
   </section>
 
+  <!-- Contact Section -->
+  <section id="contato" class="section contact-section" aria-labelledby="contato-title">
+    <h2 id="contato-title" class="section-title">Contato</h2>
+    <div class="contact-content">
+      <p>Interessado em colaborar ou discutir um projeto? Entre em contato comigo!</p>
+      <a href="mailto:diego.ewerton@example.com" class="profile-button contact-button" aria-label="Enviar e-mail para Diego Ewerton">
+        <i class="bi bi-envelope"></i> Enviar E-mail
+      </a>
+    </div>
+  </section>
+
+  <!-- Back-to-Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo da página" style="display:none;">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
   <script src="https://esm.sh/tweakpane@4.0.3"></script>
   <script>
-    // Matrix Animation (igual ao seu original)
+    // Persistir tema no localStorage
+    const savedTheme = localStorage.getItem('theme') || 'default';
+    document.body.setAttribute('data-theme', savedTheme);
+    let isGreen = savedTheme === 'green';
+    const btnTema = document.getElementById('btnTema');
+    btnTema.textContent = isGreen ? 'Tema Padrão' : 'Tema Verde';
+    btnTema.setAttribute('aria-label', isGreen ? 'Alternar para tema padrão' : 'Alternar para tema verde');
+
+    // Matrix Animation
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
+    const isMobile = window.innerWidth <= 768;
 
     let state = {
-      fps: 20,
-      color: "#1c4c7d",
+      fps: isMobile ? 15 : 30,
+      color: isGreen ? '#2e7d32' : '#1c4c7d',
       charset: "01",
-      size: 25
+      size: 20
     };
 
     let w, h, p;
@@ -141,7 +177,7 @@
       ctx.fillStyle = "rgba(0,0,0,.05)";
       ctx.fillRect(0, 0, w, h);
       ctx.fillStyle = state.color;
-      ctx.font = `${state.size}px monospace`;
+      ctx.font = `${state.size}px 'Roboto', monospace`;
       for (let i = 0; i < p.length; i++) {
         let v = p[i];
         ctx.fillText(random(state.charset), i * state.size, v);
@@ -161,7 +197,7 @@
     };
     requestAnimationFrame(animate);
 
-    // Tabs
+    // Tabs com transição suave
     const tabProjetos = document.getElementById('tab-projetos');
     const tabAnimacoes = document.getElementById('tab-animacoes');
     const secProjetos = document.getElementById('projetos');
@@ -172,24 +208,24 @@
         tabProjetos.classList.add('active');
         tabProjetos.setAttribute('aria-selected', 'true');
         tabProjetos.tabIndex = 0;
-
         tabAnimacoes.classList.remove('active');
         tabAnimacoes.setAttribute('aria-selected', 'false');
         tabAnimacoes.tabIndex = -1;
-
+        secProjetos.classList.add('fade-in');
         secProjetos.style.display = 'block';
-        secAnimacoes.style.display = 'none';
+        secAnimacoes.classList.remove('fade-in');
+        setTimeout(() => { secAnimacoes.style.display = 'none'; }, 300);
       } else {
         tabAnimacoes.classList.add('active');
         tabAnimacoes.setAttribute('aria-selected', 'true');
         tabAnimacoes.tabIndex = 0;
-
         tabProjetos.classList.remove('active');
         tabProjetos.setAttribute('aria-selected', 'false');
         tabProjetos.tabIndex = -1;
-
+        secAnimacoes.classList.add('fade-in');
         secAnimacoes.style.display = 'block';
-        secProjetos.style.display = 'none';
+        secProjetos.classList.remove('fade-in');
+        setTimeout(() => { secProjetos.style.display = 'none'; }, 300);
       }
     }
 
@@ -201,16 +237,15 @@
     const openModalBtn = document.getElementById('open-sobre-modal');
     const closeModalBtn = modal.querySelector('.close-modal');
 
-    // Get all focusable elements in modal
     function getFocusableElements() {
       return modal.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
     }
 
     openModalBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      modal.style.display = 'block';
+      modal.style.display = 'flex';
+      modal.classList.add('fade-in');
       modal.setAttribute('aria-hidden', 'false');
-      // focus primeiro elemento focável dentro do modal
       const focusableElements = getFocusableElements();
       if (focusableElements.length) {
         focusableElements[0].focus();
@@ -218,45 +253,45 @@
     });
 
     closeModalBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-      openModalBtn.focus();
+      modal.classList.remove('fade-in');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+        openModalBtn.focus();
+      }, 300);
     });
 
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
-        modal.style.display = 'none';
-        modal.setAttribute('aria-hidden', 'true');
-        openModalBtn.focus();
+        modal.classList.remove('fade-in');
+        setTimeout(() => {
+          modal.style.display = 'none';
+          modal.setAttribute('aria-hidden', 'true');
+          openModalBtn.focus();
+        }, 300);
       }
     });
 
-    // Trap focus no modal
     modal.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        modal.style.display = 'none';
-        modal.setAttribute('aria-hidden', 'true');
-        openModalBtn.focus();
+        modal.classList.remove('fade-in');
+        setTimeout(() => {
+          modal.style.display = 'none';
+          modal.setAttribute('aria-hidden', 'true');
+          openModalBtn.focus();
+        }, 300);
       }
-
       if (e.key === 'Tab') {
         const focusableElements = getFocusableElements();
         if (focusableElements.length === 0) return;
-
         const firstEl = focusableElements[0];
         const lastEl = focusableElements[focusableElements.length - 1];
-        if (e.shiftKey) {
-          // shift + tab
-          if (document.activeElement === firstEl) {
-            e.preventDefault();
-            lastEl.focus();
-          }
-        } else {
-          // tab
-          if (document.activeElement === lastEl) {
-            e.preventDefault();
-            firstEl.focus();
-          }
+        if (e.shiftKey && document.activeElement === firstEl) {
+          e.preventDefault();
+          lastEl.focus();
+        } else if (!e.shiftKey && document.activeElement === lastEl) {
+          e.preventDefault();
+          firstEl.focus();
         }
       }
     });
@@ -266,13 +301,11 @@
     const header = document.querySelector('.main-header');
     window.addEventListener('scroll', () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (scrollTop > lastScrollTop) {
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
         header.classList.add('hide');
       } else {
         header.classList.remove('hide');
       }
-
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     });
 
@@ -283,14 +316,122 @@
 
     btnMusica.addEventListener('click', () => {
       if (!tocando) {
-        player.play();
+        player.play().catch(() => console.log('Erro ao tocar música'));
         btnMusica.textContent = 'Pausar Música';
+        btnMusica.setAttribute('aria-label', 'Pausar música');
       } else {
         player.pause();
         btnMusica.textContent = 'Música';
+        btnMusica.setAttribute('aria-label', 'Tocar música');
       }
       tocando = !tocando;
     });
+
+    // Botão Tema
+    btnTema.addEventListener('click', () => {
+      isGreen = !isGreen;
+      state.color = isGreen ? '#2e7d32' : '#1c4c7d';
+      document.body.setAttribute('data-theme', isGreen ? 'green' : 'default');
+      btnTema.textContent = isGreen ? 'Tema Padrão' : 'Tema Verde';
+      btnTema.setAttribute('aria-label', isGreen ? 'Alternar para tema padrão' : 'Alternar para tema verde');
+      localStorage.setItem('theme', isGreen ? 'green' : 'default');
+    });
+
+    // Tooltip para Habilidades
+    const skillIcons = document.querySelectorAll('.skill-icon');
+    const tooltip = document.getElementById('skill-tooltip');
+    const tooltipContent = document.getElementById('skill-tooltip-content');
+    let activeIcon = null;
+
+    const skillDescriptions = {
+      javascript: 'JavaScript é uma linguagem de programação usada para adicionar interatividade e dinamismo a sites, como animações e funcionalidades em tempo real.',
+      html: 'HTML é a linguagem de marcação que estrutura conteúdo na web, definindo elementos como cabeçalhos, parágrafos e imagens.',
+      css: 'CSS é usado para estilizar páginas web, controlando cores, fontes, layouts e design visual.',
+      node: 'Node.js permite executar JavaScript no lado do servidor, construindo aplicações backend escaláveis.',
+      mysql: 'MySQL é um sistema de gerenciamento de banco de dados relacional, usado para armazenar e gerenciar dados estruturados.',
+      react: 'React é uma biblioteca JavaScript para construir interfaces de usuário dinâmicas e componentizadas, amplamente usada em aplicações modernas.'
+    };
+
+    function showTooltip(icon, skill) {
+      const description = skillDescriptions[skill];
+      if (!description) return;
+
+      tooltipContent.textContent = description;
+      const rect = icon.getBoundingClientRect();
+      tooltip.style.left = `${rect.left + rect.width / 2}px`;
+      tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
+      tooltip.style.display = 'block';
+      tooltip.classList.add('fade-in');
+      tooltip.setAttribute('aria-hidden', 'false');
+      activeIcon = icon;
+    }
+
+    function hideTooltip() {
+      tooltip.classList.remove('fade-in');
+      setTimeout(() => {
+        tooltip.style.display = 'none';
+        tooltip.setAttribute('aria-hidden', 'true');
+        if (activeIcon) {
+          activeIcon.focus();
+          activeIcon = null;
+        }
+      }, 300);
+    }
+
+    skillIcons.forEach(icon => {
+      icon.addEventListener('click', (e) => {
+        const skill = icon.getAttribute('data-skill');
+        if (activeIcon === icon) {
+          hideTooltip();
+        } else {
+          hideTooltip();
+          showTooltip(icon, skill);
+        }
+      });
+
+      icon.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const skill = icon.getAttribute('data-skill');
+          if (activeIcon === icon) {
+            hideTooltip();
+          } else {
+            hideTooltip();
+            showTooltip(icon, skill);
+          }
+        } else if (e.key === 'Escape') {
+          hideTooltip();
+        }
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!tooltip.contains(e.target) && !Array.from(skillIcons).includes(e.target)) {
+        hideTooltip();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        hideTooltip();
+      }
+    });
+
+    // Botão Voltar ao Topo
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = 'block';
+        backToTopBtn.classList.add('fade-in');
+      } else {
+        backToTopBtn.classList.remove('fade-in');
+        setTimeout(() => { backToTopBtn.style.display = 'none'; }, 300);
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 </body>
-</html>
+</html> 
